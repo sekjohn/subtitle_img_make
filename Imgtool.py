@@ -22,17 +22,17 @@ class DataInput(BaseModel):
         500,
         ge=0,
         le=1000,
-        description="글씨 x 위치",
+        description="글씨 x 축 위치",
     )
     Caption_y: int= Field(
         500,
         ge=0,
         le=1000,
-        description="글씨 y 위치",
+        description="글씨 y 축 위치",
     )
     auto_center: bool = Field(
         False,
-        description="자동으로 센터를 맞춰 줍니다",
+        description="자동으로 x 축 센터를 맞춰 줍니다",
     )
     x_plus: int = Field(
         0,
@@ -49,7 +49,7 @@ class DataInput(BaseModel):
         ge=0,
         description="font size 조절",
     )
-    font_color: Fontcolor = Field(Fontcolor.black, title="font color updae 예정")
+    font_color: Fontcolor = Field(Fontcolor.black, title="font color update 예정")
 
 class DataOutput(BaseModel):
     generated_text: str = Field(...)
