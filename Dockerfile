@@ -12,7 +12,6 @@ WORKDIR /LionrocketImgtool
 ADD requirements.txt /LionrocketImgtool/  
 RUN pip install -r requirements.txt
 ADD . /LionrocketImgtool/
-
-RUN opyrator launch-ui Imgtool:Lionlocket_Img_tool  
+CMD opyrator launch-ui Imgtool:Lionlocket_Img_tool  
 WORKDIR /LionrocketImgtool
 EXPOSE 8051
