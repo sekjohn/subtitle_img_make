@@ -96,7 +96,10 @@ class IMG:
         xy_tuple = [(x,y)]
 
         for i in data_text:
-            xy_tuple.append((x+pls_x,y+pls_y))
+            x= x+pls_x
+            y =y+pls_y
+            xy_tuple.append((x,y))
+
         return data_text,xy_tuple
         
     def Make_Imge(self):
@@ -109,7 +112,6 @@ class IMG:
             selectedFont =ImageFont.truetype(self.fonts_path,self.fonts_size) 
             draw = ImageDraw.Draw(im) #폰트경로과 사이즈를 설정해줍니다.
             txt_list,xy_list = self.text_xy_refine()
-
             for i,v in enumerate(txt_list):
                 if self.auto_center:
                     x = im.size[0]
