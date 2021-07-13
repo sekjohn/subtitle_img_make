@@ -38,11 +38,8 @@ jupyter-client==6.2.0
 jupyter-core==4.7.1
 jupyterlab-pygments==0.1.2
 jupyterlab-widgets==1.0.0
-lion-g2p==0.2.9
-lion-normalize @ git+https://github.com/lionrocket-inc/normalize.git@5a404876a6d6d680b9d979d32af2ffd4c4799e93
 loguru==0.5.3
 MarkupSafe==2.0.0
-mecab-python3==0.996.2
 mistune==0.8.4
 nbclient==0.5.3
 nbconvert==6.0.7
