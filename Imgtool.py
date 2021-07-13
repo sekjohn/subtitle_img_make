@@ -87,6 +87,7 @@ class IMG:
         self.fonts_color = data['start']['fonts_color']
         self.background_img_path = data['start']['background_img_path']
         self.fonts_path = data['start']['fonts_path']
+        self.auto_center =  data['start']['auto_center']
     def text_xy_refine(self):
         text = self.txt_list
         x,y = self.xy_list
@@ -110,7 +111,14 @@ class IMG:
             txt_list,xy_list = self.text_xy_refine()
 
             for i,v in enumerate(txt_list):
-                draw.text(xy_list[i],txt_list[i],font=selectedFont,fill=self.fonts_color)
+                if self.auto_center:
+                    x = im.size[0]
+                    w ,h = ImageFont.truetype(self.fonts_path,self.fonts_size).getsize(txt_list[i]) 
+                    draw.text(((x-w)/2,xy_list[i][1]/2),txt_list[i],font=selectedFont,fill=self.fonts_color)
+
+                else:
+                    draw.text(xy_list[i],txt_list[i],font=selectedFont,fill=self.fonts_color)
+
             img_byte_array = io.BytesIO()
             im.save(img_byte_array,format='png', subsampling=0, quality=100) 
             img_byte_array = img_byte_array.getvalue()
@@ -125,7 +133,7 @@ class IMG:
             
             return str(e)
 
-def meta_dict_data(text,xy,xyplus,img_path,font_size,font_color,fonts_path):
+def meta_dict_data(text,xy,xyplus,img_path,font_size,font_color,fonts_path,auto):
     try:
         json_data = {
             'start':{
@@ -135,7 +143,8 @@ def meta_dict_data(text,xy,xyplus,img_path,font_size,font_color,fonts_path):
                     'fonts_size':font_size,
                     'fonts_color':font_color,
                     'background_img_path':img_path,
-                    'fonts_path': fonts_path
+                    'fonts_path': fonts_path,
+                    'auto_center': auto
                 
                 }
         }
@@ -152,7 +161,7 @@ def Lionlocket_Img_tool(input: DataInput) -> DataOutput:
     font_url = downlaod.font_download(input.font_file)
 
     make_setting = meta_dict_data(input.text,(input.Caption_x,input.Caption_y),(input.x_plus,input.y_plus),
-        img_url,input.font_size,input.font_color,font_url)
+        img_url,input.font_size,input.font_color,font_url,input.auto_center)
 
     img_class = IMG(make_setting)
     result,img_byte_array = img_class.Make_Imge()
