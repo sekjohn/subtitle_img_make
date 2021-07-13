@@ -52,9 +52,9 @@ class DataInput(BaseModel):
     font_color: Fontcolor = Field(Fontcolor.black, title="font color update 예정")
 
 class DataOutput(BaseModel):
-    generated_text: str = Field(...)
+    status_message: str = Field(...)
     json_data :str = Field(...)
-    upscaled_image_file: FileContent = Field(
+    status_image_file: FileContent = Field(
         ...,
         mime_type="image/png",
         description="변환 이미지",
@@ -170,4 +170,4 @@ def Lionlocket_Img_tool(input: DataInput) -> DataOutput:
         result_text = "반환 성공"
     else:
         result_text = "반환 실패"
-    return DataOutput(generated_text=result_text,upscaled_image_file=img_byte_array,json_data=str(make_setting))
+    return DataOutput(status_message=result_text,status_image_file=img_byte_array,json_data=str(make_setting))
