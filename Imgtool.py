@@ -115,9 +115,8 @@ class IMG:
             for i,v in enumerate(txt_list):
                 if self.auto_center:
                     x = im.size[0]
-                    w ,h = ImageFont.truetype(self.fonts_path,self.fonts_size).getsize(txt_list[i]) 
+                    w ,h = ImageFont.truetype(self.fonts_path,self.fonts_size).getsize(txt_list[i].strip())
                     draw.text(((x-w)/2,xy_list[i][1]/2),txt_list[i],font=selectedFont,fill=self.fonts_color)
-
                 else:
                     draw.text(xy_list[i],txt_list[i],font=selectedFont,fill=self.fonts_color)
 
